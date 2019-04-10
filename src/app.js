@@ -3,58 +3,50 @@ console.log('App.js is running')
 const app = {
     title: "Indecision App",
     subtitle: "This is some info!!!!!", 
-    options: ['One', 'Two']
+    options: []
 }
 
+const onFromSubmit = (e) => {
+    e.preventDefault();
+
+    const option = e.target.elements.option.value;
+
+    if (option) {
+        app.options.push(option);
+        e.target.elements.option.value = ''
+    }
+    renderEverything();
+}
+
+const removeAll = () => {
+    app.options = [];
+    renderEverything();
+};
+
 // JSX - JavaScript XML
+const renderEverything = () => {
 const template = (
 <div>
     <h1>{app.title}</h1>
     {app.subtitle && <p>{app.subtitle}</p> }
     <p>{(app.options.length > 0) ? "Here are your options" : "No Options"}</p>
+    <p>{app.options.length}</p>
+    <button onClick={removeAll}>Remove All</button>
     <ol>
         <li>1</li>
         <li>2</li>
     </ol>
+    <form onSubmit={onFromSubmit}>
+        <input type='text' name='option'/>
+        <button>add option</button>
+    </form>
 </div>
 );
-let count = 0;
-const addOne = () => {
-    count++;
-    renderCounterApp();
+ReactDOM.render(template, appRoot);
 }
-const minusOne = () => {
-    count--;
-    renderCounterApp();
-}
-const reset = () => {
-    count = 0;
-    renderCounterApp();
-}
-const templateTwo = (
-    <div>
-        <h1>Count: {count}</h1>
-        <button onClick={addOne}>+1</button>
-        <button onClick={minusOne}>-1</button>
-        <button onClick={reset}>reset</button>
-    </div>
-);
-console.log(templateTwo)
 
 const appRoot = document.getElementById('app')
 
 
-const renderCounterApp = () => {
-    const templateTwo = (
-        <div>
-            <h1>Count: {count}</h1>
-            <button onClick={addOne}>+1</button>
-            <button onClick={minusOne}>-1</button>
-            <button onClick={reset}>reset</button>
-        </div>
-    );
 
-ReactDOM.render(templateTwo, appRoot);
-};
-
-renderCounterApp();
+renderEverything();
