@@ -23,7 +23,6 @@ const removeAll = () => {
     renderEverything();
 };
 
-// JSX - JavaScript XML
 const renderEverything = () => {
 const template = (
 <div>
@@ -33,8 +32,9 @@ const template = (
     <p>{app.options.length}</p>
     <button onClick={removeAll}>Remove All</button>
     <ol>
-        <li>1</li>
-        <li>2</li>
+        {
+            app.options.map((option)=><li key={option}>Option: {option}</li>)
+        }
     </ol>
     <form onSubmit={onFromSubmit}>
         <input type='text' name='option'/>

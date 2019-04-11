@@ -25,7 +25,6 @@ var removeAll = function removeAll() {
     renderEverything();
 };
 
-// JSX - JavaScript XML
 var renderEverything = function renderEverything() {
     var template = React.createElement(
         "div",
@@ -58,16 +57,14 @@ var renderEverything = function renderEverything() {
         React.createElement(
             "ol",
             null,
-            React.createElement(
-                "li",
-                null,
-                "1"
-            ),
-            React.createElement(
-                "li",
-                null,
-                "2"
-            )
+            app.options.map(function (option) {
+                return React.createElement(
+                    "li",
+                    { key: option },
+                    "Option: ",
+                    option
+                );
+            })
         ),
         React.createElement(
             "form",
